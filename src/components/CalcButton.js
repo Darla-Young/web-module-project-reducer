@@ -1,3 +1,5 @@
+// DO NOT MODIFY
+
 import React from 'react';
 
 const CalcButton = (props) => {

@@ -3,13 +3,15 @@ import './App.css';
 import TotalDisplay from './TotalDisplay';
 import CalcButton from './CalcButton';
 import reducer, { initialState } from '../reducers';
-import { addOne, applyNumber } from '../actions';
+import { addOne, applyNumber, changeOperation } from '../actions';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const onClick = (evt) => {
-    dispatch(applyNumber(parseInt(evt.target.value)));
+    Number.isInteger(parseInt(evt.target.value)) ?
+    dispatch(applyNumber(parseInt(evt.target.value))) :
+    dispatch(changeOperation(evt.target.value));
   }
 
   return (
@@ -53,9 +55,9 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={"+"}/>
-              <CalcButton value={"*"}/>
-              <CalcButton value={"-"}/>
+              <CalcButton onClick={onClick} value={"+"}/>
+              <CalcButton onClick={onClick} value={"*"}/>
+              <CalcButton onClick={onClick} value={"-"}/>
             </div>
 
             <div className="row ce_button">
